@@ -10,7 +10,7 @@ export class httpSender {
             headers: { 'Authorization': this.authorization! || auth! }
         });
     }
-    async post(url: string, body: object, auth?: string) {
+    async post(url: string, body?: object, auth?: string) {
         if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
         return await fetch(url, {
             method: 'POST',
@@ -18,6 +18,33 @@ export class httpSender {
             body: JSON.stringify({
                 ...body
             })
+        });
+    }
+    async patch(url: string, body?: object, auth?: string) {
+        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+        return await fetch(url, {
+            method: 'PATCH',
+            headers: { 'Authorization': this.authorization! || auth! },
+            body: JSON.stringify({
+                ...body
+            })
+        });
+    }
+    async put(url: string, body?: object, auth?: string) {
+        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+        return await fetch(url, {
+            method: 'PUT',
+            headers: { 'Authorization': this.authorization! || auth! },
+            body: JSON.stringify({
+                ...body
+            })
+        });
+    }
+    async delete(url: string, auth?: string) {
+        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+        return await fetch(url, {
+            method: 'DELETE',
+            headers: { 'Authorization': this.authorization! || auth! }
         });
     }
 }
