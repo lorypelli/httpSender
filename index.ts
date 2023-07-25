@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class httpSender {
-    options?: Optios;
-    constructor(options?: Optios) {
+    options?: Options;
+    constructor(options?: Options) {
         this.options = options;
     }
     async get(url: string, auth?: string, ctype: string = 'application/json') {
@@ -113,7 +113,7 @@ export async function toJSON(res: Response) {
 export async function toText(res: Response) {
     return await res.text();
 }
-interface Optios {
+interface Options {
     authorization?: string,
     content_type?: string
 }
