@@ -1,6 +1,7 @@
 # httpSender
 - [Introduction](#introduction)
 - [Creating](#creating)
+- [Functions](#functions)
 ## Introduction
 This is an npm package that is extremely useful if you want to do a lot of http requests with same headers (like I do in my bot) because you can specify headers (`Authorization` and `Content-Type`) when creating the class...
 ## Creating
