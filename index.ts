@@ -1,44 +1,85 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class httpSender {
-    authorization?: string;
-    constructor(authorization?: string) {
-        this.authorization = authorization;
+    options?: Optios;
+    constructor(options?: Optios) {
+        this.options = options;
     }
-    async get(url: string, auth?: string) {
-        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+    async get(url: string, ctype: string = 'application/json', auth?: string) {
+        if (!this.options) return await fetch(url, {
+            headers: { 'Content-type': ctype }
+        });
+        else if (!this.options!.authorization && !auth) return await fetch(url, {
+            headers: { 'Content-type': this.options!.content_type! || ctype }
+        });
         return await fetch(url, {
-            headers: { 'Authorization': this.authorization! || auth! }
+            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype }
         });
     }
-    async post(url: string, body: object | string, auth?: string) {
-        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+    async post(url: string, ctype: string = 'application/json', body: object | string, auth?: string) {
+        if (!this.options) return await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-type': ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
+        if (!this.options!.authorization && !auth) return await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-type': this.options!.content_type! || ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
         return await fetch(url, {
             method: 'POST',
-            headers: { 'Authorization': this.authorization! || auth! },
+            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
             body: JSON.stringify({...body as object} || body)
         });
     }
-    async patch(url: string, body: object, auth?: string) {
-        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+    async patch(url: string, ctype: string = 'application/json', body: object, auth?: string) {
+        if (!this.options) return await fetch(url, {
+            method: 'PATCH',
+            headers: { 'Content-type': ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
+        if (!this.options!.authorization && !auth) return await fetch(url, {
+            method: 'PATCH',
+            headers: { 'Content-type': this.options!.content_type! || ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
         return await fetch(url, {
             method: 'PATCH',
-            headers: { 'Authorization': this.authorization! || auth! },
+            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
             body: JSON.stringify({...body as object} || body)
         });
     }
-    async put(url: string, body: object, auth?: string) {
-        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+    async put(url: string, ctype: string = 'application/json', body: object, auth?: string) {
+        if (!this.options) return await fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-type': ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
+        if (!this.options!.authorization && !auth) return await fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-type': this.options!.content_type! || ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
         return await fetch(url, {
             method: 'PUT',
-            headers: { 'Authorization': this.authorization! || auth! },
+            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
             body: JSON.stringify({...body as object} || body)
         });
     }
-    async delete(url: string, body?: object, auth?: string) {
-        if (!this.authorization && !auth) return console.log('Authorization header is missing') as unknown as Response;
+    async delete(url: string, ctype: string = 'application/json', body?: object, auth?: string) {
+        if (!this.options) return await fetch(url, {
+            method: 'DELETE',
+            headers: { 'Content-type': ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
+        if (!this.options!.authorization && !auth) return await fetch(url, {
+            method: 'DELETE',
+            headers: { 'Content-type': this.options!.content_type! || ctype },
+            body: JSON.stringify({...body as object} || body)
+        });
         return await fetch(url, {
             method: 'DELETE',
-            headers: { 'Authorization': this.authorization! || auth! },
+            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
             body: JSON.stringify({...body as object} || body)   
         });
     }
@@ -48,4 +89,8 @@ export async function toJSON(res: Response) {
 }
 export async function toText(res: Response) {
     return await res.text();
+}
+interface Optios {
+    authorization?: string,
+    content_type?: string
 }
