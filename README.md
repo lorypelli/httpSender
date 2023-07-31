@@ -11,7 +11,7 @@ const http = new httpSender()
 ```
 or if you want to include also headers
 ```ts
-const http = new httpSender({ "Authorization": "", "Content-Type": "" })
+const http = new httpSender({ "Authorization": "", "Content-Type": "", "User-Agent": "" })
 ```
 ## Functions
 You have some functions to make http requests with this package
@@ -22,4 +22,4 @@ http.patch("url", "body") //body can be also an object
 http.put("url", "body") //body can be also an object
 http.delete("url", "body") //body it's not required and can be also an object
 ```
-If not specified in class creation, you'll need to specify headers with a third (Authorization) and a fourth (Content-Type) param as string
+If not specified in class creation, you'll need to specify headers with a third (Authorization), a fourth (Content-Type) and a fifth (User-Agent) param as string
