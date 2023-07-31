@@ -118,4 +118,4 @@ interface Options {
     ["Content-Type"]?: ContentTypes,
     ["User-Agent"]?: string | 'httpSender'
 }
-type ContentTypes = 'application/json' | 'application/xml' | 'application/javascript' | 'application/pdf' | 'application/x-www-form-urlencoded' | 'application/zip' | 'audio/mpeg' | 'audio/x-wav' | 'image/gif' | 'image/jpeg' | 'image/png' | 'image/x-icon' | 'image/svg+xml' | 'text/css' | 'text/html' | 'text/plain' | 'text/xml' | 'video/mpeg' | 'video/mp4' | 'video/webm' | 'video/quicktime'
+type ContentTypes = 'application/json' | 'application/xml' | 'application/javascript' | 'application/pdf' | 'application/x-www-form-urlencoded' | 'application/zip' | 'audio/mpeg' | 'audio/x-wav' | 'image/gif' | 'image/jpeg' | 'image/png' | 'image/x-icon' | 'image/svg+xml' | 'text/css' | 'text/html' | 'text/plain' | 'text/markdown' | 'text/xml' | 'video/mpeg' | 'video/mp4' | 'video/webm' | 'video/quicktime'
