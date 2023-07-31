@@ -4,105 +4,105 @@ export class httpSender {
     constructor(options?: Options) {
         this.options = options;
     }
-    async get(url: string, auth?: string, ctype: string = 'application/json') {
-        if (!this.options && !auth) return await fetch(url, {
-            headers: { 'Content-type': ctype }
+    async get(url: string, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+        if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
+            headers: { 'Content-type': ctype, 'User-Agent': usragent }
         });
         else if (!this.options) return await fetch(url, {
-            headers: { 'Authorization': auth!, 'Content-type': ctype }
+            headers: { 'Authorization': auth!, 'Content-type': ctype, 'User-Agent': usragent }
         });
-        else if (!this.options!.authorization && !auth) return await fetch(url, {
-            headers: { 'Content-type': this.options!.content_type! || ctype }
+        else if ((!this.options.authorization || this.options.authorization.trim() == '') && (!auth || auth.trim() == '')) return await fetch(url, {
+            headers: { 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent }
         });
         return await fetch(url, {
-            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype }
+            headers: { 'Authorization': auth! || this.options.authorization!, 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent }
         });
     }
-    async post(url: string, body: BodyInit, auth?: string, ctype: string = 'application/json') {
-        if (!this.options && !auth) return await fetch(url, {
+    async post(url: string, body: BodyInit, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+        if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
             method: 'POST',
-            headers: { 'Content-type': ctype },
+            headers: { 'Content-type': ctype, 'User-Agent': usragent },
             body: JSON.stringify(body)
         });
         else if (!this.options) return await fetch(url, {
             method: 'POST',
-            headers: { 'Authorization': auth!, 'Content-type': ctype },
+            headers: { 'Authorization': auth!, 'Content-type': ctype, 'User-Agent': usragent },
             body: JSON.stringify(body)
         });
-        else if (!this.options!.authorization && !auth) return await fetch(url, {
+        else if ((!this.options.authorization || this.options.authorization.trim() == '') && (!auth || auth.trim() == '')) return await fetch(url, {
             method: 'POST',
-            headers: { 'Content-type': this.options!.content_type! || ctype },
+            headers: { 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
             body: JSON.stringify(body)
         });
         return await fetch(url, {
             method: 'POST',
-            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
-            body: JSON.stringify(body)
-        });
-    }
-    async patch(url: string, body: BodyInit, auth?: string, ctype: string = 'application/json') {
-        if (!this.options && !auth) return await fetch(url, {
-            method: 'PATCH',
-            headers: { 'Content-type': ctype },
-            body: JSON.stringify(body)
-        });
-        else if (!this.options) return await fetch(url, {
-            method: 'PATCH',
-            headers: { 'Authorization': auth!, 'Content-type': ctype },
-            body: JSON.stringify(body)
-        });
-        else if (!this.options!.authorization && !auth) return await fetch(url, {
-            method: 'PATCH',
-            headers: { 'Content-type': this.options!.content_type! || ctype },
-            body: JSON.stringify(body)
-        });
-        return await fetch(url, {
-            method: 'PATCH',
-            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
+            headers: { 'Authorization': auth! || this.options.authorization!, 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
             body: JSON.stringify(body)
         });
     }
-    async put(url: string, body: BodyInit, auth?: string, ctype: string = 'application/json') {
-        if (!this.options && !auth) return await fetch(url, {
-            method: 'PUT',
-            headers: { 'Content-type': ctype },
+    async patch(url: string, body: BodyInit, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+        if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
+            method: 'PATCH',
+            headers: { 'Content-type': ctype, 'User-Agent': usragent },
             body: JSON.stringify(body)
         });
         else if (!this.options) return await fetch(url, {
-            method: 'PUT',
-            headers: { 'Authorization': auth!, 'Content-type': ctype },
+            method: 'PATCH',
+            headers: { 'Authorization': auth!, 'Content-type': ctype, 'User-Agent': usragent },
             body: JSON.stringify(body)
         });
-        else if (!this.options!.authorization && !auth) return await fetch(url, {
-            method: 'PUT',
-            headers: { 'Content-type': this.options!.content_type! || ctype },
+        else if ((!this.options.authorization || this.options.authorization.trim() == '') && (!auth || auth.trim() == '')) return await fetch(url, {
+            method: 'PATCH',
+            headers: { 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
             body: JSON.stringify(body)
         });
         return await fetch(url, {
-            method: 'PUT',
-            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
+            method: 'PATCH',
+            headers: { 'Authorization': auth! || this.options.authorization!, 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
             body: JSON.stringify(body)
         });
     }
-    async delete(url: string, body?: BodyInit, auth?: string, ctype: string = 'application/json') {
-        if (!this.options && !auth) return await fetch(url, {
+    async put(url: string, body: BodyInit, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+        if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-type': ctype, 'User-Agent': usragent },
+            body: JSON.stringify(body)
+        });
+        else if (!this.options) return await fetch(url, {
+            method: 'PUT',
+            headers: { 'Authorization': auth!, 'Content-type': ctype, 'User-Agent': usragent },
+            body: JSON.stringify(body)
+        });
+        else if ((!this.options.authorization || this.options.authorization.trim() == '') && (!auth || auth.trim() == '')) return await fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
+            body: JSON.stringify(body)
+        });
+        return await fetch(url, {
+            method: 'PUT',
+            headers: { 'Authorization': auth! || this.options.authorization!, 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
+            body: JSON.stringify(body)
+        });
+    }
+    async delete(url: string, body?: BodyInit, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+        if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
             method: 'DELETE',
-            headers: { 'Content-type': ctype },
+            headers: { 'Content-type': ctype, 'User-Agent': usragent },
             body: JSON.stringify(body)
         });
         else if (!this.options) return await fetch(url, {
             method: 'DELETE',
-            headers: { 'Authorization': auth!, 'Content-type': ctype },
+            headers: { 'Authorization': auth!, 'Content-type': ctype, 'User-Agent': usragent },
             body: JSON.stringify(body)
         });
-        else if (!this.options!.authorization && !auth) return await fetch(url, {
+        else if ((!this.options.authorization || this.options.authorization.trim() == '') && (!auth || auth.trim() == '')) return await fetch(url, {
             method: 'DELETE',
-            headers: { 'Content-type': this.options!.content_type! || ctype },
+            headers: { 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
             body: JSON.stringify(body)
         });
         return await fetch(url, {
             method: 'DELETE',
-            headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype },
+            headers: { 'Authorization': auth! || this.options.authorization!, 'Content-type': this.options.content_type! || ctype, 'User-Agent': this.options.user_agent! || usragent },
             body: JSON.stringify(body)
         });
     }
@@ -115,5 +115,7 @@ export async function toText(res: Response) {
 }
 interface Options {
     authorization?: string,
-    content_type?: string
+    content_type?: ContentTypes,
+    user_agent: string | 'httpSender'
 }
+type ContentTypes = 'application/json' | 'application/xml' | 'application/javascript' | 'application/pdf' | 'application/x-www-form-urlencoded' | 'application/zip' | 'audio/mpeg' | 'audio/x-wav' | 'image/gif' | 'image/jpeg' | 'image/png' | 'image/x-icon' | 'image/svg+xml' | 'text/css' | 'text/html' | 'text/plain' | 'text/xml' | 'video/mpeg' | 'video/mp4' | 'video/webm' | 'video/quicktime'
