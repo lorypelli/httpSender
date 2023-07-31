@@ -18,7 +18,7 @@ export class httpSender {
             headers: { 'Authorization': auth! || this.options.Authorization!, 'Content-type': this.options["Content-Type"]! || ctype, 'User-Agent': this.options["User-Agent"]! || usragent }
         });
     }
-    async post(url: string, body: BodyInit, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+    async post(url: string, body: BodyInit = '', auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
         if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
             method: 'POST',
             headers: { 'Content-type': ctype, 'User-Agent': usragent },
@@ -40,7 +40,7 @@ export class httpSender {
             body: JSON.stringify(body)
         });
     }
-    async patch(url: string, body: BodyInit, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+    async patch(url: string, body: BodyInit = '', auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
         if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
             method: 'PATCH',
             headers: { 'Content-type': ctype, 'User-Agent': usragent },
@@ -62,7 +62,7 @@ export class httpSender {
             body: JSON.stringify(body)
         });
     }
-    async put(url: string, body: BodyInit, auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
+    async put(url: string, body: BodyInit = '', auth?: string, ctype: ContentTypes = 'application/json', usragent: string = 'httpSender') {
         if (!this.options && (!auth || auth.trim() == '')) return await fetch(url, {
             method: 'PUT',
             headers: { 'Content-type': ctype, 'User-Agent': usragent },
