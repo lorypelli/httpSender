@@ -18,7 +18,7 @@ export class httpSender {
             headers: { 'Authorization': auth! || this.options!.authorization!, 'Content-type': this.options!.content_type! || ctype }
         });
     }
-    async post(url: string, body: object | string, auth?: string, ctype: string = 'application/json') {
+    async post(url: string, body: BodyInit | string, auth?: string, ctype: string = 'application/json') {
         if (!this.options && !auth) return await fetch(url, {
             method: 'POST',
             headers: { 'Content-type': ctype },
@@ -40,7 +40,7 @@ export class httpSender {
             body: JSON.stringify({ ...body as object } || body)
         });
     }
-    async patch(url: string, body: object | string, auth?: string, ctype: string = 'application/json') {
+    async patch(url: string, body: BodyInit | string, auth?: string, ctype: string = 'application/json') {
         if (!this.options && !auth) return await fetch(url, {
             method: 'PATCH',
             headers: { 'Content-type': ctype },
@@ -62,7 +62,7 @@ export class httpSender {
             body: JSON.stringify({ ...body as object } || body)
         });
     }
-    async put(url: string, body: object | string, auth?: string, ctype: string = 'application/json') {
+    async put(url: string, body: BodyInit | string, auth?: string, ctype: string = 'application/json') {
         if (!this.options && !auth) return await fetch(url, {
             method: 'PUT',
             headers: { 'Content-type': ctype },
@@ -84,7 +84,7 @@ export class httpSender {
             body: JSON.stringify({ ...body as object } || body)
         });
     }
-    async delete(url: string, body?: object | string, auth?: string, ctype: string = 'application/json') {
+    async delete(url: string, body?: BodyInit | string, auth?: string, ctype: string = 'application/json') {
         if (!this.options && !auth) return await fetch(url, {
             method: 'DELETE',
             headers: { 'Content-type': ctype },
